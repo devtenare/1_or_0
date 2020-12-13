@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>1 or 0</title>
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            list-style: none;
+            border: none;
+        }
+
+        html,
+        body {
+            height: 100%;
+        }
+
+        .cont {
+            height: 100%;
+            width: 100%;
+            font-size: 40px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-direction: column;
+        }
+
+        .num {
+            font-size: 40px;
+        }
+
+        .num:first-child {
+            margin-right: 20px;
+        }
+
+        body {
+            background: #121212;
+            color: #f1f1f1;
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="cont">
+
+        <table>
+            <tr>
+                <td colspan="3">
+                    <div id="result"></div>
+                </td>
+            </tr>
+            <tr>
+                <td>true </td>
+                <td>:&nbsp;</td>
+                <td style="min-width: 400px;">
+                    <div id="one" class="num">0</div>
+                </td>
+            </tr>
+            <tr>
+                <td>false </td>
+                <td>:&nbsp;</td>
+                <td style="min-width: 400px;">
+                    <div id="two" class="num">0</div>
+                </td>
+            </tr>
+            <tr>
+                <td>true&nbsp;: (%)</td>
+                <td>:&nbsp;</td>
+                <td style="min-width: 400px;">
+                    <div class="percent"></div>
+                </td>
+            </tr>
+            <tr>
+                <td>false: (%)</td>
+                <td>:&nbsp;</td>
+                <td style="min-width: 400px;">
+                    <div class="percent"></div>
+                </td>
+            </tr>
+            <tr>
+                <td>total</td>
+                <td>:&nbsp;</td>
+                <td style="min-width: 400px;">
+                    <div class="percent"></div>
+                </td>
+            </tr>
+        </table>
+    </div>
+    <script>
+        c = 0;
+        t = 0;
+        f = 0;
+        function start() {
+            var one = document.querySelector('#one');
+            var two = document.querySelector('#two');
+            var percent = document.querySelectorAll('.percent')
+            result = document.querySelector('#result')
+            var t0 = performance.now()
+            for (let i = 0; i < 1000000; i++) {
+                random = Math.floor(Math.random() * 2);
+            c++;
+            if (random === 1) {
+                one.innerHTML = (++one.textContent)
+                t++
+                per = (100 * t) / c
+                percent[0].innerHTML = per
+            }
+            else {
+                two.innerHTML = (++two.textContent)
+                f++
+                per = (100 * f) / c
+                percent[1].innerHTML = per
+            }   
+            }
+            percent[2].innerHTML = c + ' times'
+            var t1 = performance.now()
+            result.innerHTML = ("for loop took " + String((t1 - t0) / 1000).substring(0, 6) + " seconds.")
+        }
+        start()
+    </script>
+</body>
+
+</html>
