@@ -101,7 +101,6 @@
             var percent = document.querySelectorAll('.percent')
             result = document.querySelector('#result')
             var t0 = performance.now()
-            for (let i = 0; i < 1000000; i++) {
                 random = Math.floor(Math.random() * 2);
             c++;
             if (random === 1) {
@@ -115,13 +114,13 @@
                 f++
                 per = (100 * f) / c
                 percent[1].innerHTML = per
-            }   
             }
             percent[2].innerHTML = c + ' times'
             var t1 = performance.now()
-            result.innerHTML = ("for loop took " + String((t1 - t0) / 1000).substring(0, 6) + " seconds.")
+            // result.innerHTML = ("for loop took " + String((t1 - t0) / 1000).substring(0, 6) + " seconds.")
         }
         start()
+        setInterval(start, 10)
     </script>
 </body>
 
