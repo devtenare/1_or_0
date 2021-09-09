@@ -89,38 +89,70 @@
                     <div class="percent"></div>
                 </td>
             </tr>
+            <tr>
+                <td>elapsed time</td>
+                <td>:&nbsp;</td>
+                <td style="min-width: 400px;">
+                    <div class="elapsedtime">0 seconds</div>
+                </td>
+            </tr>
+            <tr>
+                <td>ms value</td>
+                <td>:&nbsp;</td>
+                <td style="min-width: 400px;">
+                    <div class="msvalue"></div>
+                </td>
+            </tr>
         </table>
     </div>
     <script>
         c = 0;
         t = 0;
         f = 0;
+        var one = document.querySelector('#one');
+        var two = document.querySelector('#two');
+        var percent = document.querySelectorAll('.percent')
+        var result = document.querySelector('#result')
+        var elapsedtime = document.querySelector('.elapsedtime')
+        var ms = 10;
+        let count = 1
+        document.querySelector('.msvalue').innerHTML = ms + ` miliseconds`
+        function elapsed_time(params) {
+            var elapsedtime = document.querySelector('.elapsedtime')
+            elapsedtime.innerHTML = count++ + ` seconds`;
+        }
         function start() {
-            var one = document.querySelector('#one');
-            var two = document.querySelector('#two');
-            var percent = document.querySelectorAll('.percent')
-            result = document.querySelector('#result')
-            var t0 = performance.now()
-                random = Math.floor(Math.random() * 2);
+            console.log('------------------------------------------')
+            var t0 = performance.now();
+            random = Math.floor(Math.random() * 2);
+            console.log(`t0 => `,t0);
             c++;
             if (random === 1) {
                 one.innerHTML = (++one.textContent)
                 t++
                 per = (100 * t) / c
-                percent[0].innerHTML = per
+                per = String(per)
+                
+                percent[0].innerHTML = String(per).slice(0,7)
             }
             else {
                 two.innerHTML = (++two.textContent)
                 f++
                 per = (100 * f) / c
-                percent[1].innerHTML = per
+                per = String(per)
+                
+                percent[1].innerHTML = String(per).slice(0,7)
             }
-            percent[2].innerHTML = c + ' times'
             var t1 = performance.now()
+            percent[2].innerHTML = c + ' times'
+            console.log(`t1 => `,t1);
+            console.log(`t1 - t0 => `,t1 - t0, `miliseconds`);
             // result.innerHTML = ("for loop took " + String((t1 - t0) / 1000).substring(0, 6) + " seconds.")
         }
         start()
-        setInterval(start, 10)
+        setInterval(start, ms)
+        setInterval(elapsed_time, 1000)
+        
     </script>
 </body>
 
