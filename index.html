@@ -114,8 +114,10 @@
         var percent = document.querySelectorAll('.percent')
         var result = document.querySelector('#result')
         var elapsedtime = document.querySelector('.elapsedtime')
-        var ms = 10;
+        let int,int2;
+        var ms = 0;
         let count = 1
+        const limit = 50 * 1000;
         document.querySelector('.msvalue').innerHTML = ms + ` miliseconds`
         function elapsed_time(params) {
             var elapsedtime = document.querySelector('.elapsedtime')
@@ -125,8 +127,11 @@
             console.log('------------------------------------------')
             var t0 = performance.now();
             random = Math.floor(Math.random() * 2);
-            console.log(`t0 => `,t0);
             c++;
+            if (c === limit) {
+				clearInterval(int);
+				clearInterval(int2);
+            }
             if (random === 1) {
                 one.innerHTML = (++one.textContent)
                 t++
@@ -145,13 +150,11 @@
             }
             var t1 = performance.now()
             percent[2].innerHTML = c + ' times'
-            console.log(`t1 => `,t1);
-            console.log(`t1 - t0 => `,t1 - t0, `miliseconds`);
             // result.innerHTML = ("for loop took " + String((t1 - t0) / 1000).substring(0, 6) + " seconds.")
         }
         start()
-        setInterval(start, ms)
-        setInterval(elapsed_time, 1000)
+        int = setInterval(start, ms)
+        int2 = setInterval(elapsed_time, 1000)
         
     </script>
 </body>
